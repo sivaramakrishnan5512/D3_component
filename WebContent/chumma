@@ -1,0 +1,29 @@
+
+		 if( ( Object.prototype.toString.call( dat ) === '[object Array]' )?true :false)
+			 {
+			 dat.map(function (d){
+				 if( ( Object.prototype.toString.call( d ) === '[object Array]' )?true :false)
+					 {
+					//d.map(function)
+					 	console.log("if");
+					 Object_recursion(d);
+					 }
+				 else
+					 {
+					 //console.log(d3.keys(d))
+					 	d3.keys(d).map(function(f){data_keys.push(f)});
+					 	console.log("Ielse");
+					 	Object_recursion(d);
+					 }
+			 });
+			 
+			 }else
+			 {
+				 //console.log(d3.keys(d))
+				 	d3.keys(dat).map(function(f){data_keys.push(f)});
+				 	console.log("Oelse");
+				 	d3.values(dat).map(function(f){Object_recursion(f);});
+				 	
+				 }
+		 
+	

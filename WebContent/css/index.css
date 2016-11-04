@@ -1,0 +1,406 @@
+.dashboard {
+	/* height: 380px; */
+    padding: 19px;
+    /* margin-bottom: 20px; */
+  /*  background-color: #f5f5f5;*/
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    }
+    #floatingCirclesG{
+	position:relative;
+	width:118px;
+	height:118px;
+	margin:auto;
+	transform:scale(0.6);
+		-o-transform:scale(0.6);
+		-ms-transform:scale(0.6);
+		-webkit-transform:scale(0.6);
+		-moz-transform:scale(0.6);
+}
+/*LINE TOOLTIP*/
+.tooltipline {
+  position: absolute;
+  width: 140px;
+  
+  pointer-events: none;
+  text-align: center;
+  font-family: monospace;
+  /* font-size: 14pt; */
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  border: 4px solid #66F;
+  padding: 5px;
+  border-radius: 8px ;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -khtml-border-top-left-radius: 8px;
+  -khtml-border-top-right-radius: 8px;
+  -khtml-border-bottom-right-radius: 8px;
+  -khtml-border-bottom-left-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  /*width: 100px;
+  z-index:10000;*/
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+}
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.0px;
+}
+
+#myProgress {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  background-color: #ddd;
+  border-radius:3px;
+}
+
+#myBar {
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius:3px;
+}
+
+.f_circleG{
+	position:absolute;
+	background-color:rgb(255,255,255);
+	height:21px;
+	width:21px;
+	border-radius:11px;
+		-o-border-radius:11px;
+		-ms-border-radius:11px;
+		-webkit-border-radius:11px;
+		-moz-border-radius:11px;
+	animation-name:f_fadeG;
+		-o-animation-name:f_fadeG;
+		-ms-animation-name:f_fadeG;
+		-webkit-animation-name:f_fadeG;
+		-moz-animation-name:f_fadeG;
+	animation-duration:1.66s;
+		-o-animation-duration:1.66s;
+		-ms-animation-duration:1.66s;
+		-webkit-animation-duration:1.66s;
+		-moz-animation-duration:1.66s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+}
+
+#frotateG_01{
+	left:0;
+	top:48px;
+	animation-delay:0.62s;
+		-o-animation-delay:0.62s;
+		-ms-animation-delay:0.62s;
+		-webkit-animation-delay:0.62s;
+		-moz-animation-delay:0.62s;
+}
+
+#frotateG_02{
+	left:14px;
+	top:14px;
+	animation-delay:0.83s;
+		-o-animation-delay:0.83s;
+		-ms-animation-delay:0.83s;
+		-webkit-animation-delay:0.83s;
+		-moz-animation-delay:0.83s;
+}
+
+#frotateG_03{
+	left:48px;
+	top:0;
+	animation-delay:1.04s;
+		-o-animation-delay:1.04s;
+		-ms-animation-delay:1.04s;
+		-webkit-animation-delay:1.04s;
+		-moz-animation-delay:1.04s;
+}
+
+#frotateG_04{
+	right:14px;
+	top:14px;
+	animation-delay:1.25s;
+		-o-animation-delay:1.25s;
+		-ms-animation-delay:1.25s;
+		-webkit-animation-delay:1.25s;
+		-moz-animation-delay:1.25s;
+}
+
+#frotateG_05{
+	right:0;
+	top:48px;
+	animation-delay:1.46s;
+		-o-animation-delay:1.46s;
+		-ms-animation-delay:1.46s;
+		-webkit-animation-delay:1.46s;
+		-moz-animation-delay:1.46s;
+}
+
+#frotateG_06{
+	right:14px;
+	bottom:14px;
+	animation-delay:1.66s;
+		-o-animation-delay:1.66s;
+		-ms-animation-delay:1.66s;
+		-webkit-animation-delay:1.66s;
+		-moz-animation-delay:1.66s;
+}
+
+#frotateG_07{
+	left:48px;
+	bottom:0;
+	animation-delay:1.87s;
+		-o-animation-delay:1.87s;
+		-ms-animation-delay:1.87s;
+		-webkit-animation-delay:1.87s;
+		-moz-animation-delay:1.87s;
+}
+
+#frotateG_08{
+	left:14px;
+	bottom:14px;
+	animation-delay:2.08s;
+		-o-animation-delay:2.08s;
+		-ms-animation-delay:2.08s;
+		-webkit-animation-delay:2.08s;
+		-moz-animation-delay:2.08s;
+}
+
+
+
+@keyframes f_fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-o-keyframes f_fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-ms-keyframes f_fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-webkit-keyframes f_fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-moz-keyframes f_fadeG{
+	0%{
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+		background-color:rgb(255,255,255);
+	}
+}
+
+ /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+    
+    .m-progress-bar {
+    min-height: 1em;
+    background: #8ede8d;
+    width: 5%;
+}
+.table .borderless td, .borderless th {
+    border: none;
+    border-top:none;
+}
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: #ffffff;
+}
+/*line chart*/
+..tooltipl {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltipl .tooltiptextl {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltipl .tooltiptextl::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltipl:hover .tooltiptextl {
+    visibility: visible;
+}

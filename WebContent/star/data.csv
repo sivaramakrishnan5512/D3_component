@@ -1,0 +1,29 @@
+area,program_type,program_name,grp,grp%
+all,prime,Deivam Thandha Veedu,11297,12
+urban,prime,Saravanan Meenatchi,10254,23
+rural,prime,Kalyanam Mudhal Kaadhal Varai,4590,32
+metro,non prime,Vijay Talkies,1593,21
+all,prime,Saravanan Meenatchi,4593,34
+urban,prime,Diya Aur Baati Hum,12593,45
+rural,prime,Naamkarann,9593,56
+metro,non prime,Kalyanam Mudhal Kaadhal Varai,4593,23
+all,non prime,Saath Nibhaana Saathiya,22593,34
+urban,non prime,Vijay Talkies,2593,43
+rural,non prime,Yeh Rishta Kya Kehlata Hai,6593,23
+metro,prime,Diya Aur Baati Hum,14593,45
+all,prime,Hatim,11593,54
+urban,prime,Naamkarann,11593,32
+rural,non prime,Saravanan Meenatchi,14593,20
+metro,non prime,Diya Aur Baati Hum,2593,28
+all,non prime,Yeh Rishta Kya Kehlata Hai,3593,39
+urban,prime,Naamkarann,3593,19
+rural,prime,Kalyanam Mudhal Kaadhal Varai,4593,14
+metro,prime,Hatim,5593,16
+all,non prime,Diya Aur Baati Hum,14593,35
+urban,non prime,Vijay Talkies,16593,43
+rural,prime,Naamkarann,10593,39
+metro,prime,Music Ka Maha Muqqabla,593,25
+all,non prime,Yeh Rishta Kya Kehlata Hai,593,25
+urban,prime,Yeh Rishta Kya Kehlata Hai,3393,42
+rural,prime,Hatim,5593,53
+metro,prime,Hatim,9593,55

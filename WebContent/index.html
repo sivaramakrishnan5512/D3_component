@@ -1,0 +1,196 @@
+  <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="bar/Bar.css">
+<script src="jquery/jquery.min.js"></script>
+<script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="javascript/papaparse.js"></script>
+<script src="d3/d3.min.js"></script>
+<script src="bar/Bar_main.js"></script>
+<script src="javascript/index.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" aria-expanded="true">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">CHARTS</a>
+    </div>
+    <div class="navbar-collapse collapse in" id="myNavbar" aria-expanded="true">
+      <ul class="nav navbar-nav">
+        <li ><a href="#section1" onclick="sendEvent('#demo-modal-3', 1)" class="menu">Bar-Charts</a></li>
+         <li><a href="#section3" class="menu">Line-Charts</a></li>
+        <li><a href="#section2" class="menu">TreeMap</a></li>
+        <li><a href="#section3" class="menu" >ScatterPlot</a></li>
+         </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>Charts</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li ><a href="#section1" onclick="sendEvent('#demo-modal-3', 1)" class="menu">Bar-Charts</a></li>
+        <li><a href="#section2" class="menu">LineChart</a></li>
+        <li><a href="#section2" class="menu">TreeMap</a></li>
+        <li><a href="#section3" class="menu" >ScatterPlot</a></li>
+        <li><a href="#section3" class="menu">Line-Charts</a></li>
+      </ul><br>
+    </div>
+    <br>
+    
+    <div class="col-sm-9">
+   <div class="tabbable tabs-below">
+  <div class="tab-content">
+         <div class="tab-pane active" id="one_">
+           <div class="dashboard">
+         <p id="nonSelect">Select Any Graph That you Want </p>
+      </div>
+    </div>
+         <div class="tab-pane" id="two_">
+           <textarea style="height: 350px;" class="form-control sourcecode" readonly="readonly"></textarea>
+    </div> 
+      </div>
+  <ul class="nav nav-tabs">
+          <li id="design_tab" class="active"><a href="#one_" data-toggle="tab" aria-expanded="true">Design</a></li>
+          <li class=""><a href="#two_" data-toggle="tab" aria-expanded="false">Source</a></li>
+        </ul>
+	</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Users</h4>
+            <p>1 Million</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Pages</h4>
+            <p>100 Million</p>
+          </div>
+        </div>
+      </div>
+  </div>  
+</div>
+<div class="modal multi-step" id="demo-modal-3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title step-1" data-step="1">Step 1</h4>
+                <h4 class="modal-title step-2" data-step="2">Step 2</h4>
+                <h4 class="modal-title step-3" data-step="3">Final Step</h4>
+                <div class="m-progress">
+                    <div class="m-progress-bar-wrapper">
+                        <div class="m-progress-bar">
+                        </div>
+                    </div>
+                    <div class="m-progress-stats">
+                        <span class="m-progress-current">
+                        </span>
+                        /
+                        <span class="m-progress-total">
+                        </span>
+                    </div>
+                    <div class="m-progress-complete">
+                        Completed
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body step-1" data-step="1">
+                <div class="form-group">
+                                <label for="exampleInputEmail1">Type Of Chart:&nbsp;&nbsp;</label>                              
+								<label><input type="radio" name="optradio" value="Horizontal">Horizontal&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio" value="Vertical">Vertical</label>
+                    </div>
+                <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="axis"> check if you wanna set x&y axis name
+                                </label>
+                 			</div>
+                 			<table class="table table-hover" id="axisUpdate">
+							    <thead>
+							      <tr>
+							        <th>X-Axis:</th>
+							        <th>Y-Axis:</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td><input type="text" class="form-control" id="xaxis"></td>
+							        <td><input type="text" class="form-control" id="yaxis"></td>
+							      </tr>
+							    </tbody>
+							  </table>
+                 	</div>
+            </div>
+            <div class="modal-body step-2" data-step="2">
+            	
+            	<div id="uploading_part" class="form-group">
+                	<div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                
+                                <label class="btn btn-default btn-file" >
+ 									Browse<input type="file" style=" display: none ;" id="upload" name="upload" accept=".csv,.tsv,.json" />
+								</label>
+								<button class="btn btn-default" id="upload_ok">Upload</button>
+									<p id="upload_name" class="help-block"></p>
+					
+                   </div>
+            </div>
+            <div id="keys_part" class="form-group">
+            <table class='table borderless' >
+            <tr><td>Category</td>
+            <td>Value</td></tr>
+            <tr><td><div id="xaxis_keys_part"></div></td>
+            <td><div id="yaxis_keys_part"></div></td></tr>
+            </table>
+            </div>
+            <div id="no_key_part" class="alert alert-danger">
+				  <strong>Error!</strong> <p id="error_no_key_part"></p>
+				</div>
+            
+            
+            
+            
+            <div id="floatingCirclesG">
+            	<div class="f_circleG" id="frotateG_01"></div>
+				<div class="f_circleG" id="frotateG_02"></div>
+				<div class="f_circleG" id="frotateG_03"></div>
+				<div class="f_circleG" id="frotateG_04"></div>
+				<div class="f_circleG" id="frotateG_05"></div>
+				<div class="f_circleG" id="frotateG_06"></div>
+				<div class="f_circleG" id="frotateG_07"></div>
+				<div class="f_circleG" id="frotateG_08"></div>
+			</div>
+        </div>
+        <div class="modal-body step-3" data-step="3">
+                <p class="help-block">THANK YOU...... CLICK CLOSE TO GENERATE</p>
+            </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="reset_modal()" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary step step-1" id="modal_button"  data-step="1" >Continue</button>
+                <button type="button" class="btn btn-primary step step-2" data-step="2" onclick="sendEvent('#demo-modal-3', 1)">Back</button>
+                <button type="button" class="btn btn-primary step step-2" id="modal_finish" onclick="sendEvent('#demo-modal-3', 3)" data-step="2" >Continue</button>
+            </div>
+    </div>
+    </div>
+</div>
+<script src="javascript/multi-step-modal.js"></script>
+<script>
+sendEvent = function(sel, step) {
+    $(sel).trigger('next.m.' + step);
+}
+</script>
+</body>
+</html> 

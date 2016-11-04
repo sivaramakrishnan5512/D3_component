@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap Modal Steps jQuery Plugin Demos</title>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="jquery-bootstrap-modal-steps.js"></script>
+</head>
+
+<body>
+<h1>Bootstrap Modal Steps jQuery Plugin Demos</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> Launch demo modal </button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="js-title-step"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body row hide" data-step="1" data-title="This is the first step!">
+          <div class="form-group">
+                                <label for="exampleInputEmail1">Type Of Chart:&nbsp;&nbsp;</label>                              
+								<label><input type="radio" name="optradio" value="Horizontal">Horizontal&nbsp;&nbsp;</label>
+								<label><input type="radio" name="optradio" value="Vertical">Vertical</label>
+                    </div>
+                <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="axis"> check if you wanna set x&y axis name
+                                </label>
+                 			</div>
+                 			<table class="table table-hover" id="axisUpdate">
+							    <thead>
+							      <tr>
+							        <th>X-Axis:</th>
+							        <th>Y-Axis:</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <tr>
+							        <td><input type="text" class="form-control" id="xaxis"></td>
+							        <td><input type="text" class="form-control" id="yaxis"></td>
+							      </tr>
+							    </tbody>
+							  </table>
+                 	</div>
+        </div>
+        <div class="modal-body row hide" data-step="2" data-title="This is the second and last step!">
+          
+            	<div id="uploading_part" class="form-group">
+                	<div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                
+                                <label class="btn btn-default btn-file" >
+ 									Browse<input type="file" style=" display: none ;" id="upload" name="upload" accept=".csv,.tsv,.json" />
+								</label>
+								<button class="btn btn-default" id="upload_ok">Upload</button>
+									<p id="upload_name" class="help-block"></p>
+					
+                   </div>
+            </div>
+            <div id="keys_part" class="form-group">
+            <table class='table borderless' >
+            <tr><td>Category</td>
+            <td>Value</td></tr>
+            <tr><td><div id="xaxis_keys_part"></div></td>
+            <td><div id="yaxis_keys_part"></div></td></tr>
+            </table>
+            </div>
+            <div id="no_key_part" class="alert alert-danger">
+				  <strong>Error!</strong> <p id="error_no_key_part"></p>
+				</div>
+        </div>
+        <div class="modal-body row hide" data-step="3" data-title="This is the second and last step!">
+         <p class="help-block">THANK YOU...... CLICK CLOSE TO GENERATE</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
+        <button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
+        <button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('#myModal').modalSteps();
+</script>
+
+</body>
+</html>
