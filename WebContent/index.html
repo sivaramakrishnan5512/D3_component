@@ -9,9 +9,10 @@
 <script src="jquery/jquery.min.js"></script>
 <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="javascript/papaparse.js"></script>
+<script src="javascript/index.js"></script>
 <script src="d3/d3.min.js"></script>
 <script src="bar/Bar_main.js"></script>
-<script src="javascript/index.js"></script>
+<script src="line/Line_main.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse visible-xs">
@@ -26,29 +27,28 @@
     </div>
     <div class="navbar-collapse collapse in" id="myNavbar" aria-expanded="true">
       <ul class="nav navbar-nav">
-        <li ><a href="#section1" onclick="sendEvent('#demo-modal-3', 1)" class="menu">Bar-Charts</a></li>
-         <li><a href="#section3" class="menu">Line-Charts</a></li>
+       <li ><a href="#section1" data-toggle="modal" data-target="#myModal" pageTitle="Bar Chart" page-content="barChart" class="menu">Bar-Charts</a></li>
+        <li><a href="#section2" data-toggle="modal" data-target="#myModal" pageTitle="Line Chart" page-content="lineChart" class="menu">LineChart</a></li>
         <li><a href="#section2" class="menu">TreeMap</a></li>
         <li><a href="#section3" class="menu" >ScatterPlot</a></li>
-         </ul>
+      </ul>
     </div>
   </div>
 </nav>
 <div class="container-fluid">
   <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
+    <div class="col-sm-2 sidenav hidden-xs">
       <h2>Charts</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li ><a href="#section1" onclick="sendEvent('#demo-modal-3', 1)" class="menu">Bar-Charts</a></li>
-        <li><a href="#section2" class="menu">LineChart</a></li>
-        <li><a href="#section2" class="menu">TreeMap</a></li>
-        <li><a href="#section3" class="menu" >ScatterPlot</a></li>
-        <li><a href="#section3" class="menu">Line-Charts</a></li>
+        <li ><a href="#section1" data-toggle="modal" data-target="#myModal" pageTitle="Bar Chart" page-content="barChart" class="menu">Bar-Charts</a></li>
+        <li><a href="#section2" data-toggle="modal" data-target="#myModal" pageTitle="Line Chart" page-content="lineChart" class="menu">LineChart</a></li>
+        <li><a href="#section3" class="menu">TreeMap</a></li>
+        <li><a href="#section4" class="menu" >ScatterPlot</a></li>
       </ul><br>
     </div>
     <br>
     
-    <div class="col-sm-9">
+    <div class="col-sm-10">
    <div class="tabbable tabs-below">
   <div class="tab-content">
          <div class="tab-pane active" id="one_">
@@ -82,115 +82,145 @@
       </div>
   </div>  
 </div>
-<div class="modal multi-step" id="demo-modal-3">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title step-1" data-step="1">Step 1</h4>
-                <h4 class="modal-title step-2" data-step="2">Step 2</h4>
-                <h4 class="modal-title step-3" data-step="3">Final Step</h4>
-                <div class="m-progress">
-                    <div class="m-progress-bar-wrapper">
-                        <div class="m-progress-bar">
-                        </div>
-                    </div>
-                    <div class="m-progress-stats">
-                        <span class="m-progress-current">
-                        </span>
-                        /
-                        <span class="m-progress-total">
-                        </span>
-                    </div>
-                    <div class="m-progress-complete">
-                        Completed
-                    </div>
-                </div>
-            </div>
-            <div class="modal-body step-1" data-step="1">
-                <div class="form-group">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div id="barChart" class="form-group">
+
+					<div class="form-group">
                                 <label for="exampleInputEmail1">Type Of Chart:&nbsp;&nbsp;</label>                              
 								<label><input type="radio" name="optradio" value="Horizontal">Horizontal&nbsp;&nbsp;</label>
 								<label><input type="radio" name="optradio" value="Vertical">Vertical</label>
                     </div>
-                <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="axis"> check if you wanna set x&y axis name
-                                </label>
-                 			</div>
-                 			<table class="table table-hover" id="axisUpdate">
-							    <thead>
-							      <tr>
-							        <th>X-Axis:</th>
-							        <th>Y-Axis:</th>
-							      </tr>
-							    </thead>
-							    <tbody>
-							      <tr>
-							        <td><input type="text" class="form-control" id="xaxis"></td>
-							        <td><input type="text" class="form-control" id="yaxis"></td>
-							      </tr>
-							    </tbody>
-							  </table>
-                 	</div>
-            </div>
-            <div class="modal-body step-2" data-step="2">
-            	
-            	<div id="uploading_part" class="form-group">
-                	<div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                
-                                <label class="btn btn-default btn-file" >
- 									Browse<input type="file" style=" display: none ;" id="upload" name="upload" accept=".csv,.tsv,.json" />
-								</label>
-								<button class="btn btn-default" id="upload_ok">Upload</button>
-									<p id="upload_name" class="help-block"></p>
-					
-                   </div>
-            </div>
-            <div id="keys_part" class="form-group">
-            <table class='table borderless' >
-            <tr><td>Category</td>
-            <td>Value</td></tr>
-            <tr><td><div id="xaxis_keys_part"></div></td>
-            <td><div id="yaxis_keys_part"></div></td></tr>
-            </table>
-            </div>
-            <div id="no_key_part" class="alert alert-danger">
-				  <strong>Error!</strong> <p id="error_no_key_part"></p>
-				</div>
-            
-            
-            
-            
-            <div id="floatingCirclesG">
-            	<div class="f_circleG" id="frotateG_01"></div>
-				<div class="f_circleG" id="frotateG_02"></div>
-				<div class="f_circleG" id="frotateG_03"></div>
-				<div class="f_circleG" id="frotateG_04"></div>
-				<div class="f_circleG" id="frotateG_05"></div>
-				<div class="f_circleG" id="frotateG_06"></div>
-				<div class="f_circleG" id="frotateG_07"></div>
-				<div class="f_circleG" id="frotateG_08"></div>
-			</div>
-        </div>
-        <div class="modal-body step-3" data-step="3">
-                <p class="help-block">THANK YOU...... CLICK CLOSE TO GENERATE</p>
-            </div>
-        <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick="reset_modal()" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary step step-1" id="modal_button"  data-step="1" >Continue</button>
-                <button type="button" class="btn btn-primary step step-2" data-step="2" onclick="sendEvent('#demo-modal-3', 1)">Back</button>
-                <button type="button" class="btn btn-primary step step-2" id="modal_finish" onclick="sendEvent('#demo-modal-3', 3)" data-step="2" >Continue</button>
-            </div>
+	                <div class="form-group">
+	                            <div class="checkbox">
+	                                <label>
+	                                    <input type="checkbox" id="axis"> check if you wanna set x&y axis Label name
+	                                </label>
+	                 			</div>
+	                 			<table class="table table-hover" id="axisUpdate">
+								    <thead>
+								      <tr>
+								        <th>X-Axis:</th>
+								        <th>Y-Axis:</th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								      <tr>
+								        <td><input type="text" class="form-control" id="xaxis"></td>
+								        <td><input type="text" class="form-control" id="yaxis"></td>
+								      </tr>
+								    </tbody>
+								  </table>
+	                 </div>
+			
+						<div id="uploading_part" class="form-group">
+	                	<div class="form-group">
+	                  <label for="exampleInputFile">File input</label>
+	                
+	                                <label class="btn btn-default btn-file" >
+	 									Browse<input type="file" style=" display: none ;" id="upload" name="upload" accept=".csv,.tsv,.json" />
+									</label>
+									<button class="btn btn-default" id="upload_ok">Upload</button>
+										<p id="upload_name" class="help-block"></p>
+						
+	                   </div>
+	            </div>
+	            <div id="keys_part" class="form-group">
+	            <table class='table borderless' >
+	            <tr><td>Category</td>
+	            <td>Value</td></tr>
+	            <tr><td><div id="xaxis_keys_part"></div></td>
+	            <td><div id="yaxis_keys_part"></div></td></tr>
+	            </table>
+	            </div>
+	            <div id="no_key_part" class="alert alert-danger">
+					  <strong>Error!</strong> <p id="error_no_key_part"></p>
+					</div> 
+				
+		</div>
+		<div id="lineChart" class="form-group">
+		<div class="form-group">
+	                            <div class="checkbox">
+	                                <label>
+	                                    <input type="checkbox" id="axis_line"> check if you wanna set x&y axis Label name
+	                                </label>
+	                 			</div>
+	                 			<table class="table table-hover" id="axisUpdate_line">
+								    <thead>
+								      <tr>
+								        <th>X-Axis:</th>
+								        <th>Y-Axis:</th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								      <tr>
+								        <td><input type="text" class="form-control" id="xaxis_line"></td>
+								        <td><input type="text" class="form-control" id="yaxis_line"></td>
+								      </tr>
+								    </tbody>
+								  </table>
+	                 </div>
+					<div id="uploading_part_line" class="form-group">
+				                	<div class="form-group">
+				                  <label for="exampleInputFile">File input</label>
+				                
+				                                <label class="btn btn-default btn-file" >
+				 									Browse<input type="file" style=" display: none ;" id="upload_line" name="upload" accept=".csv,.tsv,.json" />
+												</label>
+												<button class="btn btn-default" id="upload_ok_line">Upload</button>
+													<p id="upload_name_line" class="help-block"></p>							
+				                   </div>
+				     </div>				
+                    <div id="keys_part_line" class="form-group">
+	            <table class='table borderless' >
+	            <tr><td>X-axis</td>
+	            <td>Metrices & Value</td></tr>
+	            <tr><td><div id="xaxis_keys_part_line"></div></td>
+	            <td><div id="yaxis_keys_part_line"></div></td></tr>
+	            </table>
+	            <div class="checkbox">
+	                                <label>
+	                    <input type="checkbox" id="date_line"> check if you wanna set x axis as Date
+	                                </label>
+	                 			</div>
+	                 			<div id="date_input_part_line">
+	                 				          <table class="table borderless">
+	             <tbody><tr><td><div><p><strong>Enter Date Format </strong>Your sample date(<small id="original_date"></small>)</p><input type="text" class="form-control" id="date_input_line"></div>
+  <div><label>Example Date Formates: </label><p>[
+  <strong>%B</strong>-January],[
+  <strong>%b</strong>-Jan],[
+  <strong>%m</strong>-12],[
+  <strong>%d</strong>-31],[
+  <strong>%Y</strong>-2031],[
+  <strong>%y</strong>-31]
+  							</p></div>
+  </td>
+	            </tr>
+
+	            </tbody></table>
+	            </div>
+	            </div>
+	            <div id="no_key_part_line" class="alert alert-danger">
+					  <strong>Error!</strong> <p id="error_no_key_part_line"></p>
+					</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="modal_button" class="btn btn-primary">Generate</button>
+      </div>
     </div>
-    </div>
-</div>
-<script src="javascript/multi-step-modal.js"></script>
-<script>
-sendEvent = function(sel, step) {
-    $(sel).trigger('next.m.' + step);
-}
+  </div>
+</div><script>
+
 </script>
 </body>
 </html> 
