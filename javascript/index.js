@@ -3,7 +3,7 @@ $(document).ready(function()
 		initial_index();
 		$("#nonSelect").text("Select Any Graph That you Want ");
 		var pageTitle = null;
-
+jQuery(document).ready(function($) {$('.multiselect').multiselect({sort:true});});
 $("li .menu").hover(function(){$('li').attr("class","inactive");
 			var this_class="active";
 			$(this).parent().attr("class",this_class);});	
@@ -140,14 +140,16 @@ $("li .menu").click(function (){
 							{//console.log(KEYS_line[$("input[name='xaxisradio_line']:checked").val()],$("#date_input_line").val(),$("#xaxis_line").val(),$("#yaxis_line").val());
 							line(file_content_line,arr,KEYS_line[$("input[name='xaxisradio_line']:checked").val()],$("#date_input_line").val(),$("#xaxis_line").val(),$("#yaxis_line").val());
 							$('#myModal').modal('toggle');
-							}
-							
-						
-						}
-				
-				
-				
-						
+							}					
+						}			
+				}
+				if(pageTitle==="Tree Map"){
+					var multiselect_to_1=$("#multiselect_to_1").find("option");
+				for (var i = 0; i < multiselect_to_1.length; i++) {
+					multiselect_to_1[i]=multiselect_to_1[i].text;
+				}					
+					tree_map(JSON.parse(file_content_tree),multiselect_to_1)
+					//tree_map(file_content_tree)
 				}
 		});
 //----BarChart------		
@@ -364,9 +366,89 @@ $("li .menu").click(function (){
 				disabled=disable;
 				$("input[name='yaxisradio_line']").find("value="+disable).attr('disabled', true);
 			});*/
-			
-				
+			//-----TreeMap--------
+var file_name_extention_tree=null;
+			var file_name_tree = null;
+			var file_content_tree=null
+			$('#upload_tree').change(function(event){
+			if($('#upload_tree').val()==null)
+				{file_content_tree=null;
+				alert('upload a valid  file');
+				}else{file_content_tree=null;
+					 file_name_tree =  $('#upload_tree').val().split('\\').pop().toLowerCase();
+					file_name_extention_tree=file_name_tree.split('.').pop().toLowerCase();
+					if(file_name_extention_tree==""?false:true)
+					{
+						if(file_name_extention_tree=="tsv"||file_name_extention_tree=="csv"||file_name_extention_tree=="json")
+							{file_content_tree=null;
+						 var input_tree =null;
+								 input_tree=event.target;
+						    var reader_tree = new FileReader();
+							    reader_tree.onload = function(){
+							    	file_content_tree = reader_tree.result;
+							    	//console.log(file_content); 	
+							      			    };
+							    reader_tree.readAsText(input_tree.files[0]);
+							$("#upload_name_tree").text("");
+							//console.log("d"+$('#upload').val());
+							$("#upload_name_tree").text("Upload "+file_name_tree);					
+							$("#upload_ok_tree").fadeIn(1000);				 
+							}
+						else
+							{$("#upload_name_tree").text("");
+							alert('upload a valid  file');
+							$("#upload_ok_tree").hide(1000);
+							}
+					}	else{$("#upload_name_tree").text("");
+						alert('upload a valid  file');
+						$("#upload_ok_tree").hide(1000);
+					}				
+				}
+				});			
+//------Treemap-----
+	var KEYS_tree=null;	
+			$("#upload_ok_tree").click(function(){
+				$("#uploading_part_tree").hide(1000);
+							$("#multiselect_to_1").html('');
+							$("#multiselect_from_1").html('');
+
+				if(file_name_extention_tree!=null)
+				{
+					if(file_name_extention_tree=="tsv"){
+					 file_content_tree=tsvJSON(file_content_tree);
+					 //console.log(file_content_line)								
+						KEYS_tree=getKeys(file_content_tree);
+						//console.log(KEYS);						
+					}else if(file_name_extention_tree=="json")
+						{					//console.log(file_content_tree)
+						KEYS_tree=getKeyswodepth(file_content_tree);
+						}else if (file_name_extention_tree=="csv") {
+							file_content_tree=csvJSON(file_content_tree);
+							
+							KEYS_tree=getKeys(file_content_tree);
+								
+						}				
+					if( Object.prototype.toString.call(KEYS_tree)==='[object Array]'){
+						//console.log(KEYS_line)
+						
+						KEYS_tree.forEach(function(value,i){
+					var x = "<option value='"+value+"' class='form-control' style='text-align: center;text-align: -webkit-center;'>"+value+"</option>";						    
+									    $(x).appendTo("#multiselect_from_1");
+						    						});
+						$("#tree_hei_selection").show(1000);						
+					}
+					else{				
+						$("#no_key_part_tree").show(1000);
+						$("#error_no_key_part_tree").text('');
+						$("#error_no_key_part_tree").text(KEYS_tree);
+					}
+					}
+
+							
+							});	
+
 		});//document get ready ended
+
 
 
 function initial_index() 
@@ -379,6 +461,7 @@ function initial_index()
 	  $('#design_tab').attr("class","active");
 	  $("#no_key_part").hide();
 	  $("#no_key_part_line").hide();
+	   $("#no_key_part_tree").hide();
 	  $("#keys_part").hide();
 	   $("#stacked_bar").hide();
 	  $("#keys_part_line").hide();
@@ -394,6 +477,7 @@ function reset_modal()
 	$('#date_input_line').val(null);
 	$('#upload').val(null);
 	$('#upload_line').val(null);
+	$('#upload_tree').val(null);
 	$("#keys_part").hide(1000);
 	$("#stacked_bar").hide(1000);
 	$("#keys_part_line").hide(1000);
@@ -403,10 +487,13 @@ function reset_modal()
 	$("#yaxis_keys_part_line").html('');
 	$("#no_key_part").hide(1000);
 	$("#no_key_part_line").hide(1000);
+	$("#no_key_part_tree").hide(1000);
 	$("#error_no_key_part").text('');
 	$("#error_no_key_part_line").text('');
+	$("#error_no_key_part_tree").text('');
 	$("#upload_name").text("");
 	$("#upload_name_line").text("");
+	$("#upload_name_tree").text("");
 	$('input[name=addoravg]').prop('checked',false);	
 	//$('#upload').change();
 	$("#axis").prop('checked',false);
@@ -417,9 +504,14 @@ function reset_modal()
 	$('#date_input_part_line').hide();
 	$("#uploading_part").show();
 	$("#uploading_part_line").show();
-  	$('#floatingCirclesG').hide();
+	$("#uploading_part_tree").show();
     $('#upload_ok').hide();
     $('#upload_ok_line').hide();
+      $('#upload_ok_tree').hide();
     $('#barChart').css("display", "none");
     $('#lineChart').css("display", "none");
+    $('#treemap').css("display", "none");
+    $("#tree_hei_selection").hide();
+    $("#multiselect_to_1").html('');
+    $("#multiselect_from_1").html('');
 }

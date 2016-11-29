@@ -230,6 +230,26 @@ svg.selectAll("recta")
 	 
 	 
  }//fun getKeys
+ function getKeyswodepth(file_content)
+ {
+	 data_keys=[];
+ //console.log(file_content);
+	 try{
+	 var data=JSON.parse(file_content);
+	 //console.log(data[0])
+	 //console.log("depth is one return daata keys")
+		 Object_recursion(data[0]);
+		 return data_keys;
+		 
+	 }catch (e) {
+		// TODO: handle exception
+		 return "Not In Perfect JSON";
+	}
+	
+
+	 
+	 
+ }//fun getKeys
  
  function Object_recursion(dat)
  {//console.log(dat);
@@ -283,47 +303,12 @@ svg.selectAll("recta")
  	
  	
  }
- function tsvJSON(tsv)
- {
-	 
-	  var lines=tsv.split("\n");
-	 
-	  var result = [];
-	 
-	  var headers=lines[0].split("\t");
-	 
-	  for(var i=1;i<lines.length;i++){
-	 
-		  var obj = {};
-		  var currentline=lines[i].split("\t");
-	 
-		  for(var j=0;j<headers.length;j++){
-			  obj[headers[j]] = currentline[j];
-		  }
-	 
-		  result.push(obj);
-	 
-	  }
-	  
-	  //return result; //JavaScript object
-	  return JSON.stringify(result); //JSON
+  function tsvJSON(tsv)
+ { 	return JSON.stringify(d3.tsvParse(tsv));	 
+	
 	}
- function csvJSON(csv){
-var parsed=Papa.parse(csv).data;
-var returnjson=[];
-
-	for (var i = 1; i < parsed.length; i++) {
-		var array_element = parsed[i];
-		var obj={};
-		parsed[0].forEach(function(value,j){
-			obj[value] = array_element[j];
-		});
-		returnjson.push(obj);
-		
-	}
-	//return returnjson;//json obj
-	  return JSON.stringify(returnjson);
-
+ function csvJSON(csv){ 	
+ 	return JSON.stringify(d3.csvParse(csv));
 	 }
  function isJsonObjDepthIsOne(data)
  {

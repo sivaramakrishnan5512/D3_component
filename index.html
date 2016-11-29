@@ -8,11 +8,12 @@
 <link rel="stylesheet" href="bar/Bar.css">
 <script src="jquery/jquery.min.js"></script>
 <script src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="javascript/papaparse.js"></script>
+<script src="javascript/multiselect.min.js"></script>
 <script src="javascript/index.js"></script>
 <script src="d3/d3.min.js"></script>
 <script src="bar/Bar_main.js"></script>
 <script src="line/Line_main.js"></script>
+<script src="tree/Tree_main.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse visible-xs">
@@ -29,8 +30,8 @@
       <ul class="nav navbar-nav">
        <li ><a href="#section1" data-toggle="modal" data-target="#myModal" pageTitle="Bar Chart" page-content="barChart" class="menu">Bar-Charts</a></li>
         <li><a href="#section2" data-toggle="modal" data-target="#myModal" pageTitle="Line Chart" page-content="lineChart" class="menu">LineChart</a></li>
-        <li><a href="#section2" class="menu">TreeMap</a></li>
-        <li><a href="#section3" class="menu" >ScatterPlot</a></li>
+        <li><a  data-toggle="modal" data-target="#myModal" pageTitle="Tree Map" page-content="treemap" class="menu">TreeMap</a></li>
+        <li><a  class="menu" >ScatterPlot</a></li>
       </ul>
     </div>
   </div>
@@ -40,10 +41,10 @@
     <div class="col-sm-2 sidenav hidden-xs">
       <h2>Charts</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li ><a href="#section1" data-toggle="modal" data-target="#myModal" pageTitle="Bar Chart" page-content="barChart" class="menu">Bar-Charts</a></li>
-        <li><a href="#section2" data-toggle="modal" data-target="#myModal" pageTitle="Line Chart" page-content="lineChart" class="menu">LineChart</a></li>
-        <li><a href="#section3" class="menu">TreeMap</a></li>
-        <li><a href="#section4" class="menu" >ScatterPlot</a></li>
+        <li ><a data-toggle="modal" data-target="#myModal" pageTitle="Bar Chart" page-content="barChart" class="menu">Bar-Charts</a></li>
+        <li><a data-toggle="modal" data-target="#myModal" pageTitle="Line Chart" page-content="lineChart" class="menu">LineChart</a></li>
+        <li><a  data-toggle="modal" data-target="#myModal" pageTitle="Tree Map" page-content="treemap" class="menu">TreeMap</a></li>
+        <li><a class="menu" >ScatterPlot</a></li>
       </ul><br>
     </div>
     <br>
@@ -221,6 +222,66 @@
 	            </div>
 	            <div id="no_key_part_line" class="alert alert-danger">
 					  <strong>Error!</strong> <p id="error_no_key_part_line"></p>
+					</div>
+		</div>
+		
+<!-- TREEMAP -->
+		<div id="treemap" class="form-group" style="display: block;">
+				<div class="form-group">
+				<select id="type_tree" name="type_tree" class="form-control">
+				<option value="Single">Single</option>
+				<option value="Multiple">Multiple</option>
+		      	<option value="Multi_level">Multi_level</option>
+				</select>
+				</div>
+
+			<div id="uploading_part_tree" class="form-group">				                	
+				                  <label for="exampleInputFile">File input</label>               
+          <label class="btn btn-default btn-file">
+          	Browse<input type="file" style=" display: none ;" id="upload_tree" name="upload_tree" accept=".csv,.tsv,.json">
+					</label>
+			<button class="btn btn-default" id="upload_ok_tree">Upload</button>
+					<p id="upload_name_tree" class="help-block"></p>							
+							     </div>	
+
+			<div id="tree_hei_selection">
+  				<div class="row">
+   <div class="col-xs-5" style="
+    text-align: center;
+"><p class="form-group"><strong>List OF Metrices</strong>
+  </p>
+  </div>
+  <div class="col-xs-2">
+  </div>
+   <div class="col-xs-5" style="
+    text-align: center;
+">
+  <p class="form-group"><strong>List should Be Hierarchy<br> &amp;<br>  Last One is Value</strong></p>
+  </div>
+  
+</div>
+  <div class="row">
+    <div class="col-xs-5">
+        <select name="from[]" style="height: 200px;" class="multiselect form-control" size="8" multiple="multiple" id="multiselect_from_1" data-right="#multiselect_to_1" data-right-all="#right_All_1" data-right-selected="#right_Selected_1" data-left-all="#left_All_1" data-left-selected="#left_Selected_1">     
+        </select>
+    </div>
+    
+    <div class="col-xs-2">
+        <button type="button" id="right_All_1" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+        <button type="button" id="right_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+        <button type="button" id="left_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+        <button type="button" id="left_All_1" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+    </div>
+    
+    <div class="col-xs-5">
+        <select name="to[]" style="height: 200px;" id="multiselect_to_1" class="form-control" size="8" multiple="multiple"></select>
+    </div>
+</div>
+
+  
+  </div>
+  <div id="no_key_part_tree" class="alert alert-danger">
+					  <strong>Error!</strong> <p id="error_no_key_part_tree"></p>
 					</div>
 		</div>
       </div>
