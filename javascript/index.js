@@ -3,6 +3,10 @@ $(document).ready(function()
 		initial_index();
 		$("#nonSelect").text("Select Any Graph That you Want ");
 		var pageTitle = null;
+
+$("li .menu").hover(function(){$('li').attr("class","inactive");
+			var this_class="active";
+			$(this).parent().attr("class",this_class);});	
 $("li .menu").click(function (){
 	
 			reset_modal();
@@ -55,11 +59,32 @@ $("li .menu").click(function (){
 					}				
 					}
 				var Category_key=$("input[name='xaxisradio']:checked").val(),Value_key=$("input[name='yaxisradio']:checked").val();
-				console.log(Category_key+"--"+Value_key)
+				//console.log(Category_key+"--"+Value_key)
 				if(Category_key!=null && Value_key!=null ){
 				try {
-						bar(file_content,typeofchart,xaxis,yaxis,Category_key,Value_key,file_name_extention);
+						var data=[];
+						 data=JSON.parse(file_content);
+						data=sortByKey(data, Category_key);	
+
+					var stacked_bar=data.map(function(d,i){
+						if (i!=data.length-1) {
+							if(data[i+1][Category_key]===data[i][Category_key]){
+								return true;
+							
+						}else{
+									return false;}}}).indexOf(true);	
+					//console.log(stacked_bar)
+						if (stacked_bar!=-1) {							
+							$("#keys_part").hide();
+							$("#stacked_bar").show();
+							if ($("input[name='addoravg']:checked").val()?true:false) {
+						bar(file_content,typeofchart,xaxis,yaxis,Category_key,Value_key,file_name_extention,$("input[name='addoravg']:checked").val());
 						$('#myModal').modal('toggle'); 
+							}
+						}else{
+						bar(file_content,typeofchart,xaxis,yaxis,Category_key,Value_key,file_name_extention,stacked_bar);
+						$('#myModal').modal('toggle'); 
+					}
 					} catch (e) {
 						// TODO: handle exception
 					//	console.log("HieghtNotAdjust")
@@ -355,6 +380,7 @@ function initial_index()
 	  $("#no_key_part").hide();
 	  $("#no_key_part_line").hide();
 	  $("#keys_part").hide();
+	   $("#stacked_bar").hide();
 	  $("#keys_part_line").hide();
 
 }
@@ -369,6 +395,7 @@ function reset_modal()
 	$('#upload').val(null);
 	$('#upload_line').val(null);
 	$("#keys_part").hide(1000);
+	$("#stacked_bar").hide(1000);
 	$("#keys_part_line").hide(1000);
 	$("#xaxis_keys_part").html('');
 	$("#yaxis_keys_part").html('');
@@ -380,6 +407,7 @@ function reset_modal()
 	$("#error_no_key_part_line").text('');
 	$("#upload_name").text("");
 	$("#upload_name_line").text("");
+	$('input[name=addoravg]').prop('checked',false);	
 	//$('#upload').change();
 	$("#axis").prop('checked',false);
 	$("#axis_line").prop('checked',false);

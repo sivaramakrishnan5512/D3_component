@@ -65,8 +65,7 @@
           <li class=""><a href="#two_" data-toggle="tab" aria-expanded="false">Source</a></li>
         </ul>
 	</div>
-    </div>
-    <div class="row">
+	<div class="row">
         <div class="col-sm-3">
           <div class="well">
             <h4>Users</h4>
@@ -80,6 +79,7 @@
           </div>
         </div>
       </div>
+    </div>
   </div>  
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -140,6 +140,17 @@
 	            <tr><td><div id="xaxis_keys_part"></div></td>
 	            <td><div id="yaxis_keys_part"></div></td></tr>
 	            </table>
+	            </div>
+	            <div id="stacked_bar" class="form-group">
+	            <table class="table borderless">
+	            <tbody><tr>
+	            <td>Choose Any one of the option for nesting the data</td></tr>
+	            <tr><td><label><input type="radio" id="addoravg" value="add" name="addoravg">Add</label>
+  &nbsp;<label><input type="radio" id="addoravg" value="avg" name="addoravg">Average</label>
+   &nbsp;<label><input type="radio" id="addoravg" value="stacked_bar" name="addoravg">Stacked Bar</label></td>
+	            </tr>
+	            </tbody>
+	            </table>	            
 	            </div>
 	            <div id="no_key_part" class="alert alert-danger">
 					  <strong>Error!</strong> <p id="error_no_key_part"></p>

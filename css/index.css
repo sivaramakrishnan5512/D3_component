@@ -60,7 +60,9 @@
   stroke: steelblue;
   stroke-width: 1.0px;
 }
-
+.recta{
+  stroke: white;
+}
 #myProgress {
   position: relative;
   width: 100%;

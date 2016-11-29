@@ -1,4 +1,4 @@
- function bar(filecontent,orientation,xaxis_label,yaxis_label,xaxis_value,yaxis_value,file_extention) 
+  function bar(filecontent,orientation,xaxis_label,yaxis_label,xaxis_value,yaxis_value,file_extention,stacked_bar) 
  {	 //console.log(filecontent)
 	 //console.log(orientation+"  "+xaxis_label+"  "+yaxis_label+"  "+file_extention)
 	 
@@ -10,12 +10,18 @@
 		yaxis_label=yaxis_value;
 		}
 	//console.log(orientation) ;
-	var margin = {top: 20, right: 20, bottom: 70, left: 40},
-	width = 600 - margin.left - margin.right-100;
-	if(orientation=="Vertical")
+	
+	
+	if(orientation=="Vertical"){
+		var margin = {top: 20, right: 20, bottom: 70, left: 40},
+		width = 600 - margin.left - margin.right-100;
 	height = 300 - margin.top - margin.bottom-100;
-	if(orientation=="Horizontal")
-	height = 375 - margin.top - margin.bottom-100;
+}
+	if(orientation=="Horizontal"){
+		var margin = {top: 20, right: 20, bottom: 70, left: 40},
+		width = 600 - margin.left - margin.right-100;
+	height = 350 - margin.top - margin.bottom-100;
+}
 //add the SVG element
 		  d3.select(".bar").remove();
 var svg = d3.select(".dashboard").append("svg")
@@ -23,15 +29,27 @@ var svg = d3.select(".dashboard").append("svg")
 			.attr("viewBox", `10 10 ${width + margin.left + margin.right} ${height + margin.left}`)
 			/*.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)*/
-			.append("g")
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+			.append("g");
+			
 var data=[];
 data=JSON.parse(filecontent);
-//load the data
-/*d3.json(file, function(error, data) {
-*/
-//console.log(data);
+console.log(stacked_bar)
+if (stacked_bar=== "add"){
+		var nested_data = d3.nest()
+						.key(function(d) { return d[xaxis_value]; })
+						.entries(data);
+						eval("nested_data=nested_data.map(function(d){return{"+xaxis_value+":d.key,"+yaxis_value+":+d3.sum(d.values,function(d){return +d[yaxis_value]})}})");	
+	}else if (stacked_bar==="avg"){
+var nested_data = d3.nest()
+						.key(function(d) { return d[xaxis_value]; })
+						.entries(data);
+						eval("nested_data=nested_data.map(function(d){return{"+xaxis_value+":d.key,"+yaxis_value+":+(d3.sum(d.values,function(d){return +d[yaxis_value]}))/d.values.length}})")
+	}else
+	{
+		
+	var	nested_data=sortByKey(data,xaxis_value);
+	}
+
 data.forEach(function(d) {
     d[xaxis_value] = d[xaxis_value];
     d[yaxis_value] = +d[yaxis_value];
@@ -42,18 +60,20 @@ data.forEach(function(d) {
 //console.log(data);	
 if(orientation=="Vertical")
 	{
+
+		svg.attr("transform", "translate(" + 50 + "," + 17 + ")");
 	var tooltip = d3.select("body").append("div")
 	.style("position", "absolute").style("position", "absolute")
 	.style("z-index", "10")
 	.style("fill","#2196F3")
 	.style("visibility", "hidden");
-	var x     =d3.scaleBand().rangeRound([0, width]).padding(0.05);
+	var x     =d3.scaleBand().rangeRound([0, width]).padding(0.5);
 //var x     = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 /*var xAxis = d3.svg.axis()
 				  .scale(x)
 	              .orient("bottom");*/
   var xAxis =d3.axisBottom(x);
-            x.domain(data.map(function(d) {return d[xaxis_value]; }));
+            x.domain(nested_data.map(function(d) {return d[xaxis_value]; }));
 var xline =svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
@@ -70,22 +90,21 @@ xline.append("text")
 var y     =d3.scaleLinear().range([height, 0]);
 //var y     = d3.scale.linear().range([height, 0]);
 //console.log(d3.max(data, function(d) { return d[yaxis_value]; }))
-var fiv_perc=(d3.max(data, function(d) { return d[yaxis_value]; })/100)*20;
+var fiv_perc=(d3.max(nested_data, function(d) { return d[yaxis_value]; })/100)*20;
 //console.log((d3.max(data, function(d) { return d[yaxis_value]; })+fiv_perc))
 /*var yAxis = d3.svg.axis()
     		  .scale(y)
 			  .orient("left")
 			  .ticks(3);*/
  var yAxis =d3.axisLeft(y);
-console.log(data);
-			y.domain([0, (d3.max(data, function(d) { return d[yaxis_value]; })+fiv_perc)]);
+			y.domain([0, (d3.max(nested_data, function(d) { return d[yaxis_value]; })+fiv_perc)]);
 var yline =svg.append("g")
 			  .attr("class", "y axis")
 			  .call(yAxis);
-svg.selectAll("bar")
-.data(data)
+svg.selectAll("recta")
+.data(nested_data)
 .enter().append("rect")
-.attr("class", "bar")
+.attr("class", "recta")
 .attr("x", function(d) { return x(d[xaxis_value]); })
 .attr("width", x.bandwidth())
 .attr("y", function(d) { return y(d[yaxis_value]); })
@@ -111,6 +130,8 @@ yline.append("text")
 //if horizontal then x & y will be
 if(orientation=="Horizontal")
 	{
+			console.log(nested_data)
+		svg.attr("transform", "translate(" + 40 + "," + 15 + ")");
 	var tooltip = d3.select("body").append("div")
 	.style("position", "absolute").style("position", "absolute")
 	.style("z-index", "10")
@@ -121,8 +142,9 @@ if(orientation=="Horizontal")
 	/*var xAxis = d3.svg.axis()
 				  .scale(x)
 	              .orient("bottom");
-*/var fiv_perc=(d3.max(data, function(d) { return d[yaxis_value]; })/100)*20;
-            x.domain([0, (d3.max(data, function(d) { return d[yaxis_value]; })+fiv_perc)]);
+*/var fiv_perc=(d3.max(nested_data, function(d) { return d[yaxis_value]; })/100)*10;
+console.log(d3.max(nested_data, function(d) { return d[yaxis_value]; })+fiv_perc)
+            x.domain([0, (d3.max(nested_data, function(d) { return d[yaxis_value]; })+fiv_perc)]);
 var xline =svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
@@ -135,7 +157,7 @@ xline.append("text")
 .attr("y", 30)
 .style("text-anchor", "end")
 .text(xaxis_label);
-var y = d3.scaleBand().rangeRound([height,0]).padding(0.05);
+var y = d3.scaleBand().padding(.5).range([height,0]);
 //var y = d3.scale.ordinal().rangeRoundBands([height,0], .05);
 var yAxis =d3.axisLeft(y);
 /*var yAxis = d3.svg.axis()
@@ -158,14 +180,14 @@ yline.append("text")
 .attr("dy", ".71em")
 .style("text-anchor", "end")
 .text(yaxis_label);
-svg.selectAll("bar")
-.data(data)
+svg.selectAll("recta")
+.data(nested_data)
 .enter().append("rect")
-.attr("class", "bar")
+.attr("class", "recta")
 .attr("value",function(d){return d[yaxis_value];})
 .attr("y", function(d) {return y(d[xaxis_value]); })
 //.attr("height", x.range())
-.attr("height", "5")
+.attr("height", y.bandwidth())
 //.attr("x", "0")
 .attr("width", function(d) { return  x(d[yaxis_value]); })
 .on("mouseover", function(d){
@@ -340,5 +362,11 @@ var returnjson=[];
 		else if (jsonObjIterations.indexOf(false)===1) {
 			return false;
 		}
+	}
+		 function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
  }
  
